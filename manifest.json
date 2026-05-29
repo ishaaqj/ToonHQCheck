@@ -1,0 +1,44 @@
+{
+    "manifest_version": 2,
+    "name": "ToonHQ Notify",
+    "version": "1.0",
+    "description": "Notifies when a ToonTown Acitivty is ready",
+    "browser_action": {
+        "default_icon": "border-48.png",
+        "default_title": "Legacy Button",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "notifications",
+        "storage",
+        "tabs"
+    ],
+    "icons": {
+        "48": "icons/border-48.png"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "beastify@mozilla.org",
+            "data_collection_permissions": {
+                "required": [
+                    "none"
+                ]
+            }
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.toonhq.org/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}
