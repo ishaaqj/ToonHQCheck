@@ -1,5 +1,7 @@
 let selectedKeywords = [];
 let isWatching = false;
+let selectedCorp = null;
+let selectedStory = null;
 
 const statusDot = document.getElementById('statusDot');
 const statusText = document.getElementById('statusText');

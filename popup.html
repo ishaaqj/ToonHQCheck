@@ -15,6 +15,7 @@
             --gold: #f5c518;
             --blue: #1a6ea8;
             --green: #2a9d3e;
+            --purple: #7b3fa0;
             --text: #2b1a1a;
             --muted: #7a5c5c;
             --card-bg: #fff8f0;
@@ -35,7 +36,6 @@
             overflow-x: hidden;
         }
 
-        /* HEADER */
         .header {
             background: var(--red);
             padding: 14px 16px 12px;
@@ -79,7 +79,6 @@
             text-transform: uppercase;
         }
 
-        /* STATUS BAR */
         .status-bar {
             margin: 16px 14px 0;
             background: var(--card-bg);
@@ -105,11 +104,6 @@
             background: #ccc;
             flex-shrink: 0;
             transition: background 0.3s;
-        }
-
-        .status-dot.active {
-            background: var(--green);
-            box-shadow: 0 0 6px var(--green);
         }
 
         .status-dot.watching {
@@ -161,7 +155,6 @@
             color: var(--red);
         }
 
-        /* SECTION LABEL */
         .section-label {
             font-family: 'Fredoka One', cursive;
             font-size: 13px;
@@ -171,27 +164,25 @@
             padding: 14px 16px 6px;
         }
 
-        /* CATEGORY TABS */
         .tabs {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             padding: 0 14px 8px;
         }
 
         .tab {
             flex: 1;
             font-family: 'Fredoka One', cursive;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 0.3px;
-            padding: 7px 4px;
+            padding: 7px 2px;
             border-radius: 8px;
-            border: 2px solid transparent;
+            border: 2px solid var(--border);
             cursor: pointer;
             text-align: center;
             transition: all 0.15s;
             background: var(--card-bg);
             color: var(--muted);
-            border-color: var(--border);
         }
 
         .tab:hover {
@@ -211,16 +202,15 @@
             background: var(--blue);
         }
 
-        .tab[data-cat="other"].active-tab {
-            background: var(--green);
+        .tab[data-cat="facilities"].active-tab {
+            background: var(--purple);
         }
 
-        /* BUTTON GRID */
         .btn-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 7px;
-            padding: 0 14px 14px;
+            padding: 0 14px 10px;
         }
 
         .activity-btn {
@@ -256,12 +246,93 @@
             box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
         }
 
-        .activity-btn[data-cat="other"].selected {
-            background: var(--green);
-            box-shadow: 0 3px 10px rgba(42, 157, 62, 0.35);
+        .activity-btn[data-cat="facilities"].selected {
+            background: var(--purple);
+            box-shadow: 0 3px 10px rgba(123, 63, 160, 0.35);
         }
 
-        /* WATCH BUTTON */
+        .sub-label {
+            font-family: 'Fredoka One', cursive;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 14px 5px;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            padding: 0 14px 10px;
+        }
+
+        .story-btn {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            padding: 7px 4px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+        }
+
+        .story-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .story-btn.selected {
+            border-color: transparent;
+            color: #fff;
+            background: var(--blue);
+            box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
+        }
+
+        .building-preview {
+            margin: 0 14px 10px;
+            background: var(--card-bg);
+            border: 1.5px solid var(--border);
+            border-radius: 9px;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .preview-tag {
+            background: var(--blue);
+            color: #fff;
+            border-radius: 5px;
+            padding: 2px 7px;
+            font-size: 10.5px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .preview-tag:hover {
+            background: var(--red-dark);
+        }
+
+        .divider {
+            height: 1.5px;
+            background: var(--border);
+            margin: 2px 14px 12px;
+            border-radius: 2px;
+        }
+
         .watch-wrap {
             padding: 0 14px 16px;
         }
@@ -307,15 +378,6 @@
             background: #e6b800;
         }
 
-        /* DIVIDER */
-        .divider {
-            height: 1.5px;
-            background: var(--border);
-            margin: 0 14px 12px;
-            border-radius: 2px;
-        }
-
-        /* PANEL VISIBILITY */
         .panel {
             display: none;
         }
@@ -349,7 +411,7 @@
     <div class="tabs">
         <div class="tab active-tab" data-cat="bosses">⚔️ Bosses</div>
         <div class="tab" data-cat="buildings">🏢 Buildings</div>
-        <div class="tab" data-cat="other">🎯 Other</div>
+        <div class="tab" data-cat="facilities">🏭 Facilities</div>
     </div>
 
     <!-- BOSSES PANEL -->
@@ -359,34 +421,63 @@
             <button class="activity-btn" data-cat="bosses" data-keyword="CFO">CFO</button>
             <button class="activity-btn" data-cat="bosses" data-keyword="CJ">CJ</button>
             <button class="activity-btn" data-cat="bosses" data-keyword="CEO">CEO</button>
-            <button class="activity-btn" data-cat="bosses" data-keyword="Field Office">Field Office</button>
+            <button class="activity-btn" data-cat="bosses" data-keyword="FIELD OFFICE">Field Office</button>
+            <button class="activity-btn" data-cat="bosses" data-keyword="THE BOILER">The Boiler</button>
         </div>
     </div>
 
     <!-- BUILDINGS PANEL -->
     <div class="panel" id="panel-buildings">
+        <div class="sub-label">Corp Type</div>
         <div class="btn-grid">
-            <button class="activity-btn" data-cat="buildings" data-keyword="Sellbot Building">Sellbot Bldg</button>
-            <button class="activity-btn" data-cat="buildings" data-keyword="Cashbot Building">Cashbot Bldg</button>
-            <button class="activity-btn" data-cat="buildings" data-keyword="Lawbot Building">Lawbot Bldg</button>
-            <button class="activity-btn" data-cat="buildings" data-keyword="Bossbot Building">Bossbot Bldg</button>
-            <button class="activity-btn" data-cat="buildings" data-keyword="Five Story">5-Story</button>
-            <button class="activity-btn" data-cat="buildings" data-keyword="Four Story">4-Story</button>
-            <button class="activity-btn" data-cat="buildings" data-keyword="Three Story">3-Story</button>
-            <button class="activity-btn" data-cat="buildings" data-keyword="Two Story">2-Story</button>
-            <button class="activity-btn" data-cat="buildings" data-keyword="One Story">1-Story</button>
+            <button class="activity-btn" data-cat="buildings" data-type="corp"
+                data-value="SELLBOT BUILDING">Sellbot</button>
+            <button class="activity-btn" data-cat="buildings" data-type="corp"
+                data-value="CASHBOT BUILDING">Cashbot</button>
+            <button class="activity-btn" data-cat="buildings" data-type="corp"
+                data-value="LAWBOT BUILDING">Lawbot</button>
+            <button class="activity-btn" data-cat="buildings" data-type="corp"
+                data-value="BOSSBOT BUILDING">Bossbot</button>
+        </div>
+        <div class="sub-label">Stories (optional)</div>
+        <div class="story-grid">
+            <button class="story-btn" data-type="story" data-value="ONE STORY">1</button>
+            <button class="story-btn" data-type="story" data-value="TWO STORY">2</button>
+            <button class="story-btn" data-type="story" data-value="THREE STORY">3</button>
+            <button class="story-btn" data-type="story" data-value="FOUR STORY">4</button>
+            <button class="story-btn" data-type="story" data-value="FIVE STORY">5</button>
+        </div>
+        <div class="sub-label">Will search for</div>
+        <div class="building-preview" id="buildingPreview">
+            <span id="previewPlaceholder" style="color:var(--muted)">Select corp type above</span>
         </div>
     </div>
 
-    <!-- OTHER PANEL -->
-    <div class="panel" id="panel-other">
+    <!-- FACILITIES PANEL -->
+    <div class="panel" id="panel-facilities">
+        <div class="sub-label">Sellbot Factories</div>
         <div class="btn-grid">
-            <button class="activity-btn" data-cat="other" data-keyword="Bullion Mint">Bullion Mint</button>
-            <button class="activity-btn" data-cat="other" data-keyword="Dollar Mint">Dollar Mint</button>
-            <button class="activity-btn" data-cat="other" data-keyword="Coin Mint">Coin Mint</button>
-            <button class="activity-btn" data-cat="other" data-keyword="Cog Golf Course">Golf Course</button>
-            <button class="activity-btn" data-cat="other" data-keyword="DA Office">DA Office</button>
-            <button class="activity-btn" data-cat="other" data-keyword="Minigolf">Minigolf</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="SHORT SCRAP FACTORY">Short Scrap</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="LONG SCRAP FACTORY">Long Scrap</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="SHORT STEEL FACTORY">Short Steel</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="LONG STEEL FACTORY">Long Steel</button>
+        </div>
+        <div class="sub-label">Cashbot Mints</div>
+        <div class="btn-grid">
+            <button class="activity-btn" data-cat="facilities" data-keyword="COIN MINT">Coin Mint</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="BULLION MINT">Bullion Mint</button>
+        </div>
+        <div class="sub-label">Lawbot DA Offices</div>
+        <div class="btn-grid">
+            <button class="activity-btn" data-cat="facilities" data-keyword="DA OFFICE JUNIOR">DA Junior</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="DA OFFICE SENIOR">DA Senior</button>
+        </div>
+        <div class="sub-label">Cog Golf Courses</div>
+        <div class="btn-grid">
+            <button class="activity-btn" data-cat="facilities" data-keyword="FIRST FAIRWAY COG GOLF COURSE">First
+                Fairway</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="FINAL FRINGE COG GOLF COURSE">Final
+                Fringe</button>
         </div>
     </div>
 
@@ -397,6 +488,7 @@
             <span>🔍</span> <span id="watchBtnText">Select an activity first</span>
         </button>
     </div>
+
     <script src="popup.js"></script>
 </body>
 
