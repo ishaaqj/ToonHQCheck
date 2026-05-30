@@ -119,6 +119,7 @@ document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(btn
 document.querySelectorAll('[data-type="shopping"]').forEach(btn => {
     btn.addEventListener('click', () => {
         if (isWatching) return;
+
         if (selectedKeywords.includes(btn.dataset.value)) {
             selectedKeywords = selectedKeywords.filter(k => k !== btn.dataset.value);
             btn.classList.remove('selected');
@@ -136,12 +137,13 @@ document.querySelectorAll('[data-type="star"]').forEach(btn => {
     btn.addEventListener('click', () => {
         if (isWatching) return;
 
-        if (selectedKeywords.includes(btn.dataset.value)) {
-            selectedKeywords = selectedKeywords.filter(k => k !== btn.dataset.value);
-            btn.classList.remove('selected');
-        } else {
+        if (!selectedKeywords.includes(btn.dataset.value)) {
             selectedKeywords.push(btn.dataset.value);
             btn.classList.add('selected');
+        } else {
+            selectedKeywords = selectedKeywords.filter(k => k !== btn.dataset.value);
+            btn.classList.remove('selected');
+
         }
         updateWatchBtn();
     });
@@ -151,6 +153,7 @@ document.querySelectorAll('[data-type="star"]').forEach(btn => {
 document.querySelectorAll('.activity-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         if (isWatching) return; // lock while watching
+
         if (!selectedKeywords.includes(btn.dataset.keyword)) {
             selectedKeywords.push(btn.dataset.keyword);
             btn.classList.add('selected');
