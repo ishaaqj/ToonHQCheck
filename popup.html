@@ -147,7 +147,6 @@
             padding: 3px 9px;
             cursor: pointer;
             transition: all 0.15s;
-            display: none;
         }
 
         .clear-btn:hover {
@@ -162,6 +161,15 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             padding: 14px 16px 6px;
+        }
+
+        .sub-label {
+            font-family: 'Fredoka One', cursive;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 14px 5px;
         }
 
         .tabs {
@@ -213,6 +221,28 @@
             padding: 0 14px 10px;
         }
 
+        .opt-grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            padding: 0 14px 10px;
+        }
+
+        .opt-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            padding: 0 14px 10px;
+        }
+
+        .opt-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            padding: 0 14px 10px;
+        }
+
+        /* Standard keyword buttons */
         .activity-btn {
             font-family: 'Nunito', sans-serif;
             font-weight: 700;
@@ -241,6 +271,12 @@
             transform: translateY(-1px);
         }
 
+        .activity-btn[data-cat="facilities"].selected {
+            background: var(--purple);
+            box-shadow: 0 3px 10px rgba(123, 63, 160, 0.35);
+        }
+
+        /* Combo selector primary buttons (corp type, factory type) */
         .cat-btn {
             font-family: 'Nunito', sans-serif;
             font-weight: 700;
@@ -261,7 +297,7 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
         }
 
-        .cat-btn.selected {
+        .cat-btn[data-type="corp"].selected {
             border-color: transparent;
             color: #fff;
             background: var(--blue);
@@ -269,33 +305,16 @@
             transform: translateY(-1px);
         }
 
-        .activity-btn[data-cat="buildings"].selected {
-            background: var(--blue);
-            box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
-        }
-
-        .activity-btn[data-cat="facilities"].selected {
+        .cat-btn[data-type="factory"].selected {
+            border-color: transparent;
+            color: #fff;
             background: var(--purple);
             box-shadow: 0 3px 10px rgba(123, 63, 160, 0.35);
+            transform: translateY(-1px);
         }
 
-        .sub-label {
-            font-family: 'Fredoka One', cursive;
-            font-size: 11px;
-            color: var(--muted);
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            padding: 4px 14px 5px;
-        }
-
-        .story-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 5px;
-            padding: 0 14px 10px;
-        }
-
-        .story-btn {
+        /* Optional sub-selector buttons (story, length, star, shopping) */
+        .opt-btn {
             font-family: 'Nunito', sans-serif;
             font-weight: 700;
             font-size: 11px;
@@ -309,47 +328,41 @@
             transition: all 0.15s;
         }
 
-        .story-btn:hover {
+        .opt-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
         }
 
-        .story-btn.selected {
+        .opt-btn[data-type="story"].selected {
             border-color: transparent;
             color: #fff;
             background: var(--blue);
             box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
         }
 
-        .cat-btn {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 700;
-            font-size: 12.5px;
-            padding: 9px 10px;
-            border-radius: 9px;
-            border: 2px solid var(--border);
-            background: var(--card-bg);
+        .opt-btn[data-type="length"].selected {
+            border-color: transparent;
+            color: #fff;
+            background: var(--purple);
+            box-shadow: 0 3px 10px rgba(123, 63, 160, 0.35);
+        }
+
+        .opt-btn[data-type="star"].selected {
+            border-color: transparent;
             color: var(--text);
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.15s;
-            line-height: 1.3;
+            background: var(--gold);
+            box-shadow: 0 3px 10px rgba(245, 197, 24, 0.4);
         }
 
-        .cat-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-        }
-
-        .cat-btn.selected {
+        .opt-btn[data-type="shopping"].selected {
             border-color: transparent;
             color: #fff;
-            background: var(--blue);
-            box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
-            transform: translateY(-1px);
+            background: var(--red);
+            box-shadow: 0 3px 10px rgba(155, 21, 29, 0.35);
         }
 
-        .building-preview {
+        /* Preview boxes */
+        .combo-preview {
             margin: 0 14px 10px;
             background: var(--card-bg);
             border: 1.5px solid var(--border);
@@ -366,20 +379,19 @@
         }
 
         .preview-tag {
-            background: var(--blue);
             color: #fff;
             border-radius: 5px;
             padding: 2px 7px;
             font-size: 10.5px;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
         }
 
-        .preview-tag:hover {
-            background: var(--red-dark);
+        .preview-tag.blue {
+            background: var(--blue);
+        }
+
+        .preview-tag.purple {
+            background: var(--purple);
         }
 
         .divider {
@@ -430,7 +442,7 @@
             box-shadow: 0 4px 12px rgba(245, 197, 24, 0.4);
         }
 
-        .watch-btn.watching-state:hover {
+        .watch-btn.watching-state:hover:not(:disabled) {
             background: #e6b800;
         }
 
@@ -472,41 +484,61 @@
 
     <!-- BOSSES PANEL -->
     <div class="panel active" id="panel-bosses">
+
+        <div class="sub-label">Boss Battles</div>
         <div class="btn-grid">
             <button class="activity-btn" data-cat="bosses" data-keyword="VP">VP</button>
             <button class="activity-btn" data-cat="bosses" data-keyword="CFO">CFO</button>
             <button class="activity-btn" data-cat="bosses" data-keyword="CJ">CJ</button>
             <button class="activity-btn" data-cat="bosses" data-keyword="CEO">CEO</button>
-            <button class="activity-btn" data-cat="bosses" data-keyword="FIELD OFFICE">Field Office</button>
-            <button class="activity-btn" data-cat="bosses" data-keyword="THE BOILER">The Boiler</button>
         </div>
+
+        <div class="sub-label">VP Shopping (optional)</div>
+        <div class="opt-grid-2">
+            <button class="opt-btn" data-type-="shopping" data-value="NO SHOPPING VP">No Shopping</button>
+            <button class="opt-btn" data-type="shopping" data-value="SHOPPING VP">Shopping</button>
+        </div>
+
+        <div class="sub-label">Field Offices</div>
+        <div class="btn-grid">
+            <button class="activity-btn" data-cat="bosses" data-keyword="FIELD OFFICE">Any Star</button>
+        </div>
+        <div class="sub-label">Star Rating (optional)</div>
+        <div class="opt-grid-4">
+            <button class="opt-btn" data-type="star" data-value="ONE STAR FIELD OFFICE">1 ⭐</button>
+            <button class="opt-btn" data-type="star" data-value="TWO STAR FIELD OFFICE">2 ⭐</button>
+            <button class="opt-btn" data-type="star" data-value="THREE STAR FIELD OFFICE">3 ⭐</button>
+            <button class="opt-btn" data-type="star" data-value="FOUR STAR FIELD OFFICE">4 ⭐</button>
+        </div>
+
     </div>
 
     <!-- BUILDINGS PANEL -->
     <div class="panel" id="panel-buildings">
         <div class="sub-label">Corp Type</div>
         <div class="btn-grid">
-            <button class="cat-btn" data-cat="buildings" data-type="corp" data-value="SELLBOT BUILDING">Sellbot</button>
-            <button class="cat-btn" data-cat="buildings" data-type="corp" data-value="CASHBOT BUILDING">Cashbot</button>
-            <button class="cat-btn" data-cat="buildings" data-type="corp" data-value="LAWBOT BUILDING">Lawbot</button>
-            <button class="cat-btn" data-cat="buildings" data-type="corp" data-value="BOSSBOT BUILDING">Bossbot</button>
+            <button class="cat-btn" data-type="corp" data-value="SELLBOT BUILDING">Sellbot</button>
+            <button class="cat-btn" data-type="corp" data-value="CASHBOT BUILDING">Cashbot</button>
+            <button class="cat-btn" data-type="corp" data-value="LAWBOT BUILDING">Lawbot</button>
+            <button class="cat-btn" data-type="corp" data-value="BOSSBOT BUILDING">Bossbot</button>
         </div>
         <div class="sub-label">Stories (optional)</div>
-        <div class="story-grid">
-            <button class="story-btn" data-type="story" data-value="ONE STORY">1</button>
-            <button class="story-btn" data-type="story" data-value="TWO STORY">2</button>
-            <button class="story-btn" data-type="story" data-value="THREE STORY">3</button>
-            <button class="story-btn" data-type="story" data-value="FOUR STORY">4</button>
-            <button class="story-btn" data-type="story" data-value="FIVE STORY">5</button>
+        <div class="opt-grid-5">
+            <button class="opt-btn" data-type="story" data-value="ONE STORY">1</button>
+            <button class="opt-btn" data-type="story" data-value="TWO STORY">2</button>
+            <button class="opt-btn" data-type="story" data-value="THREE STORY">3</button>
+            <button class="opt-btn" data-type="story" data-value="FOUR STORY">4</button>
+            <button class="opt-btn" data-type="story" data-value="FIVE STORY">5</button>
         </div>
         <div class="sub-label">Will search for</div>
-        <div class="building-preview" id="buildingPreview">
-            <span id="previewPlaceholder" style="color:var(--muted)">Select corp type above</span>
+        <div class="combo-preview" id="buildingPreview">
+            <span id="buildingPlaceholder" style="color:var(--muted)">Select corp type above</span>
         </div>
     </div>
 
     <!-- FACILITIES PANEL -->
     <div class="panel" id="panel-facilities">
+
         <div class="sub-label">Sellbot Factories</div>
         <div class="btn-grid">
             <button class="activity-btn" data-cat="facilities" data-keyword="SHORT SCRAP FACTORY">Short Scrap</button>
@@ -514,16 +546,21 @@
             <button class="activity-btn" data-cat="facilities" data-keyword="SHORT STEEL FACTORY">Short Steel</button>
             <button class="activity-btn" data-cat="facilities" data-keyword="LONG STEEL FACTORY">Long Steel</button>
         </div>
+
+        <div class="divider"></div>
+
         <div class="sub-label">Cashbot Mints</div>
         <div class="btn-grid">
             <button class="activity-btn" data-cat="facilities" data-keyword="COIN MINT">Coin Mint</button>
             <button class="activity-btn" data-cat="facilities" data-keyword="BULLION MINT">Bullion Mint</button>
         </div>
+
         <div class="sub-label">Lawbot DA Offices</div>
         <div class="btn-grid">
             <button class="activity-btn" data-cat="facilities" data-keyword="DA OFFICE JUNIOR">DA Junior</button>
             <button class="activity-btn" data-cat="facilities" data-keyword="DA OFFICE SENIOR">DA Senior</button>
         </div>
+
         <div class="sub-label">Cog Golf Courses</div>
         <div class="btn-grid">
             <button class="activity-btn" data-cat="facilities" data-keyword="FIRST FAIRWAY COG GOLF COURSE">First
@@ -531,6 +568,7 @@
             <button class="activity-btn" data-cat="facilities" data-keyword="FINAL FRINGE COG GOLF COURSE">Final
                 Fringe</button>
         </div>
+
     </div>
 
     <div class="divider"></div>

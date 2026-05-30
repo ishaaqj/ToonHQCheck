@@ -77,7 +77,73 @@ document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(btn
                 btn.classList.add('selected');
             }
         }
-        updateBuildingPreview();
+        // remove any existing building keyword
+        selectedKeywords = selectedKeywords.filter(k => !k.includes('BUILDING') && !k.includes('STORY'));
+
+        // combine whatever is selected
+        if (selectedCorp || selectedStory) {
+            let keyword;
+            if (selectedStory && selectedCorp) {
+                keyword = selectedStory + ' ' + selectedCorp;
+            } else if (selectedStory) {
+                keyword = selectedStory;
+            } else {
+                keyword = selectedCorp;
+            }
+            selectedKeywords.push(keyword);
+            watchBtn.disabled = false;
+            watchBtnText.textContent = `Watch for ${selectedKeywords}`;
+        } else {
+            // nothing selected, update button accordingly
+            if (selectedKeywords.length > 0) {
+                watchBtn.disabled = false;
+                watchBtnText.textContent = `Watch for ${selectedKeywords}`;
+            } else {
+                watchBtn.disabled = true;
+                watchBtnText.textContent = 'Select an activity first';
+            }
+        }
+
+        // update watch button
+        if (selectedKeywords.length > 0) {
+            watchBtn.disabled = false;
+            watchBtnText.textContent = `Watch for ${selectedKeywords}`;
+        } else {
+            watchBtn.disabled = true;
+            watchBtnText.textContent = 'Select an activity first';
+        }
+    });
+});
+
+//Shopping
+document.querySelectorAll('[data-type="shopping"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (isWatching) return;
+        if (selectedKeywords.includes(btn.dataset.value)) {
+            selectedKeywords = selectedKeywords.filter(k => k !== btn.dataset.value);
+            btn.classList.remove('selected');
+        } else {
+            selectedKeywords.push(btn.dataset.value);
+            btn.classList.add('selected');
+        }
+        updateWatchBtn();
+    });
+});
+
+
+//Field Offices
+document.querySelectorAll('[data-type="star"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (isWatching) return;
+
+        if (selectedKeywords.includes(btn.dataset.value)) {
+            selectedKeywords = selectedKeywords.filter(k => k !== btn.dataset.value);
+            btn.classList.remove('selected');
+        } else {
+            selectedKeywords.push(btn.dataset.value);
+            btn.classList.add('selected');
+        }
+        updateWatchBtn();
     });
 });
 
@@ -94,8 +160,7 @@ document.querySelectorAll('.activity-btn').forEach(btn => {
             });
             btn.classList.remove('selected');
         }
-        watchBtn.disabled = false;
-        watchBtnText.textContent = `Watch for ${selectedKeywords}`;
+        updateWatchBtn();
         watchBtn.classList.remove('watching-state');
         watchBtn.querySelector('span').textContent = '🔍';
     });
@@ -117,6 +182,7 @@ watchBtn.addEventListener('click', () => {
         selectedCorp = null;
         selectedStory = null;
         document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('[data-type="factory"]').forEach(b => b.classList.remove('selected'));
         updateBuildingPreview();
 
     } else {
@@ -137,11 +203,23 @@ clearBtn.addEventListener('click', () => {
     browser.storage.local.set({ watching: false, keywords: null });
     document.querySelectorAll('.activity-btn').forEach(b => b.classList.remove('selected'));
     document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('[data-type="factory"]').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('[data-type="shopping"], [data-type="star"]').forEach(b => b.classList.remove('selected'));
     updateBuildingPreview();
     setWatchingUI(false, null);
     watchBtn.disabled = true;
     watchBtnText.textContent = 'Select an activity first';
 });
+
+function updateWatchBtn() {
+    if (selectedKeywords.length > 0) {
+        watchBtn.disabled = false;
+        watchBtnText.textContent = `Watch for ${selectedKeywords}`;
+    } else {
+        watchBtn.disabled = true;
+        watchBtnText.textContent = 'Select an activity first';
+    }
+}
 
 function setWatchingUI(watching, keyword) {
     if (watching) {
@@ -155,6 +233,7 @@ function setWatchingUI(watching, keyword) {
         selectedCorp = null;
         selectedStory = null;
         document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('[data-type="shopping"], [data-type="star"]').forEach(b => b.classList.remove('selected'));
         updateBuildingPreview();
         // lock activity buttons
         document.querySelectorAll('.activity-btn').forEach(b => b.style.opacity = '0.5');
