@@ -241,6 +241,34 @@
             transform: translateY(-1px);
         }
 
+        .cat-btn {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 12.5px;
+            padding: 9px 10px;
+            border-radius: 9px;
+            border: 2px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+            line-height: 1.3;
+        }
+
+        .cat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .cat-btn.selected {
+            border-color: transparent;
+            color: #fff;
+            background: var(--blue);
+            box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
+            transform: translateY(-1px);
+        }
+
         .activity-btn[data-cat="buildings"].selected {
             background: var(--blue);
             box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
@@ -291,6 +319,34 @@
             color: #fff;
             background: var(--blue);
             box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
+        }
+
+        .cat-btn {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 12.5px;
+            padding: 9px 10px;
+            border-radius: 9px;
+            border: 2px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+            line-height: 1.3;
+        }
+
+        .cat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .cat-btn.selected {
+            border-color: transparent;
+            color: #fff;
+            background: var(--blue);
+            box-shadow: 0 3px 10px rgba(26, 110, 168, 0.35);
+            transform: translateY(-1px);
         }
 
         .building-preview {
@@ -430,14 +486,10 @@
     <div class="panel" id="panel-buildings">
         <div class="sub-label">Corp Type</div>
         <div class="btn-grid">
-            <button class="activity-btn" data-cat="buildings" data-type="corp"
-                data-value="SELLBOT BUILDING">Sellbot</button>
-            <button class="activity-btn" data-cat="buildings" data-type="corp"
-                data-value="CASHBOT BUILDING">Cashbot</button>
-            <button class="activity-btn" data-cat="buildings" data-type="corp"
-                data-value="LAWBOT BUILDING">Lawbot</button>
-            <button class="activity-btn" data-cat="buildings" data-type="corp"
-                data-value="BOSSBOT BUILDING">Bossbot</button>
+            <button class="cat-btn" data-cat="buildings" data-type="corp" data-value="SELLBOT BUILDING">Sellbot</button>
+            <button class="cat-btn" data-cat="buildings" data-type="corp" data-value="CASHBOT BUILDING">Cashbot</button>
+            <button class="cat-btn" data-cat="buildings" data-type="corp" data-value="LAWBOT BUILDING">Lawbot</button>
+            <button class="cat-btn" data-cat="buildings" data-type="corp" data-value="BOSSBOT BUILDING">Bossbot</button>
         </div>
         <div class="sub-label">Stories (optional)</div>
         <div class="story-grid">

@@ -9,6 +9,7 @@ const watchBtn = document.getElementById('watchBtn');
 const watchBtnText = document.getElementById('watchBtnText');
 const clearBtn = document.getElementById('clearBtn');
 
+clearBtn.style.display = 'block';
 // Load saved state
 browser.storage.local.get(['keywords', 'watching']).then(result => {
     if (result.keywords && result.keywords.length > 0) {
@@ -50,6 +51,36 @@ document.querySelectorAll('.tab').forEach(tab => {
     });
 });
 
+//Buildings
+document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (isWatching) return;
+        const type = btn.dataset.type;
+        if (type === 'corp') {
+            // toggle corp selection
+            if (selectedCorp === btn.dataset.value) {
+                selectedCorp = null;
+                btn.classList.remove('selected');
+            } else {
+                document.querySelectorAll('[data-type="corp"]').forEach(b => b.classList.remove('selected'));
+                selectedCorp = btn.dataset.value;
+                btn.classList.add('selected');
+            }
+        } else if (type === 'story') {
+            // toggle story selection
+            if (selectedStory === btn.dataset.value) {
+                selectedStory = null;
+                btn.classList.remove('selected');
+            } else {
+                document.querySelectorAll('[data-type="story"]').forEach(b => b.classList.remove('selected'));
+                selectedStory = btn.dataset.value;
+                btn.classList.add('selected');
+            }
+        }
+        updateBuildingPreview();
+    });
+});
+
 // Activity button selection
 document.querySelectorAll('.activity-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -83,6 +114,10 @@ watchBtn.addEventListener('click', () => {
         setWatchingUI(false, null);
         watchBtn.disabled = true;
         watchBtnText.textContent = 'Select an activity first';
+        selectedCorp = null;
+        selectedStory = null;
+        document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(b => b.classList.remove('selected'));
+        updateBuildingPreview();
 
     } else {
         // Start watching
@@ -97,8 +132,12 @@ watchBtn.addEventListener('click', () => {
 clearBtn.addEventListener('click', () => {
     isWatching = false;
     selectedKeywords = [];
+    selectedCorp = null;
+    selectedStory = null;
     browser.storage.local.set({ watching: false, keywords: null });
     document.querySelectorAll('.activity-btn').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(b => b.classList.remove('selected'));
+    updateBuildingPreview();
     setWatchingUI(false, null);
     watchBtn.disabled = true;
     watchBtnText.textContent = 'Select an activity first';
@@ -112,7 +151,11 @@ function setWatchingUI(watching, keyword) {
         watchBtnText.textContent = 'Stop Watching';
         watchBtn.querySelector('span').textContent = '⏹';
         watchBtn.disabled = false;
-        clearBtn.style.display = 'block';
+
+        selectedCorp = null;
+        selectedStory = null;
+        document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(b => b.classList.remove('selected'));
+        updateBuildingPreview();
         // lock activity buttons
         document.querySelectorAll('.activity-btn').forEach(b => b.style.opacity = '0.5');
     } else {
@@ -123,8 +166,41 @@ function setWatchingUI(watching, keyword) {
             watchBtnText.textContent = `Watch for ${selectedKeywords}`;
             watchBtn.querySelector('span').textContent = '🔍';
         }
-        clearBtn.style.display = 'none';
         document.querySelectorAll('.activity-btn').forEach(b => b.style.opacity = '1');
 
     }
+}
+
+function updateBuildingPreview() {
+    const preview = document.getElementById('buildingPreview');
+    const placeholder = document.getElementById('previewPlaceholder');
+
+    if (!selectedCorp && !selectedStory) {
+        placeholder.style.display = 'inline';
+        preview.querySelectorAll('.preview-tag').forEach(t => t.remove());
+        watchBtn.disabled = selectedKeywords.length === 0;
+        return;
+    }
+
+    placeholder.style.display = 'none';
+    preview.querySelectorAll('.preview-tag').forEach(t => t.remove());
+
+    let keyword;
+    if (selectedStory && selectedCorp) {
+        keyword = selectedStory + ' ' + selectedCorp;
+    } else if (selectedStory) {
+        keyword = selectedStory;
+    } else {
+        keyword = selectedCorp;
+    }
+    const tag = document.createElement('span');
+    tag.className = 'preview-tag';
+    tag.textContent = keyword;
+    preview.appendChild(tag);
+
+    // add or replace building keyword in selectedKeywords
+    selectedKeywords = selectedKeywords.filter(k => !k.includes('BUILDING') && !k.includes('STORY'));
+    selectedKeywords.push(keyword);
+    watchBtn.disabled = false;
+    watchBtnText.textContent = `Watch for ${selectedKeywords}`;
 }
