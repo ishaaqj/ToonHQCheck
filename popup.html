@@ -347,7 +347,7 @@
             box-shadow: 0 3px 10px rgba(123, 63, 160, 0.35);
         }
 
-        .opt-btn[data-type="star"].selected {
+        .activity-btn[data-type1="star"].selected {
             border-color: transparent;
             color: var(--text);
             background: var(--gold);
@@ -453,6 +453,16 @@
         .panel.active {
             display: block;
         }
+
+        #ttr-eyes {
+            height: 55px;
+            width: 70px;
+            margin-left: auto;
+            padding-right: 15px;
+            opacity: 0.9;
+            transform: rotate(10deg);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
     </style>
 </head>
 
@@ -464,6 +474,7 @@
             <div class="header-title">ToonHQ Notify</div>
             <div class="header-sub">Group Match Alerts</div>
         </div>
+        <img src="TTReyes.png" id="ttr-eyes" />
     </div>
 
     <div class="status-bar">
@@ -477,7 +488,7 @@
     <div class="section-label">Select Activity</div>
 
     <div class="tabs">
-        <div class="tab active-tab" data-cat="bosses">⚔️ Bosses</div>
+        <div class="tab active-tab" data-cat="bosses">💼 Bosses</div>
         <div class="tab" data-cat="buildings">🏢 Buildings</div>
         <div class="tab" data-cat="facilities">🏭 Facilities</div>
     </div>
@@ -505,10 +516,10 @@
         </div>
         <div class="sub-label">Star Rating (optional)</div>
         <div class="opt-grid-4">
-            <button class="activity-btn" data-cat="bosses" data-keyword="ONE STAR FIELD OFFICE">1 ⭐</button>
-            <button class="activity-btn" data-cat="bosses" data-keyword="TWO STAR FIELD OFFICE">2 ⭐</button>
-            <button class="activity-btn" data-cat="bosses" data-keyword="THREE STAR FIELD OFFICE">3 ⭐</button>
-            <button class="activity-btn" data-cat="bosses" data-keyword="FOUR STAR FIELD OFFICE">4 ⭐</button>
+            <button class="activity-btn" data-type1="star" data-cat="bosses" data-keyword="ONE STAR">1 ⭐</button>
+            <button class="activity-btn" data-type1="star" data-cat="bosses" data-keyword="TWO STAR">2 ⭐</button>
+            <button class="activity-btn" data-type1="star" data-cat="bosses" data-keyword="THREE STAR">3 ⭐</button>
+            <button class="activity-btn" data-type1="star" data-cat="bosses" data-keyword="FOUR STAR">4 ⭐</button>
         </div>
 
     </div>
@@ -530,10 +541,10 @@
             <button class="opt-btn" data-type="story" data-value="FOUR STORY">4</button>
             <button class="opt-btn" data-type="story" data-value="FIVE STORY">5</button>
         </div>
-        <div class="sub-label">Will search for</div>
+        <!--<div class="sub-label">Will search for</div>
         <div class="combo-preview" id="buildingPreview">
             <span id="buildingPlaceholder" style="color:var(--muted)">Select corp type above</span>
-        </div>
+        </div> -->
     </div>
 
     <!-- FACILITIES PANEL -->
@@ -541,18 +552,18 @@
 
         <div class="sub-label">Sellbot Factories</div>
         <div class="btn-grid">
-            <button class="activity-btn" data-cat="facilities" data-keyword="SHORT SCRAP FACTORY">Short Scrap</button>
-            <button class="activity-btn" data-cat="facilities" data-keyword="LONG SCRAP FACTORY">Long Scrap</button>
-            <button class="activity-btn" data-cat="facilities" data-keyword="SHORT STEEL FACTORY">Short Steel</button>
-            <button class="activity-btn" data-cat="facilities" data-keyword="LONG STEEL FACTORY">Long Steel</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="SHORT SCRAP">Short Scrap</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="LONG SCRAP">Long Scrap</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="SHORT STEEL">Short Steel</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="LONG STEEL">Long Steel</button>
         </div>
 
         <div class="divider"></div>
 
         <div class="sub-label">Cashbot Mints</div>
         <div class="btn-grid">
-            <button class="activity-btn" data-cat="facilities" data-keyword="COIN MINT">Coin Mint</button>
-            <button class="activity-btn" data-cat="facilities" data-keyword="BULLION MINT">Bullion Mint</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="COIN">Coin Mint</button>
+            <button class="activity-btn" data-cat="facilities" data-keyword="BULLION">Bullion Mint</button>
         </div>
 
         <div class="sub-label">Lawbot DA Offices</div>

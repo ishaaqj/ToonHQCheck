@@ -20,7 +20,7 @@ function toonHQCheck() {
                 });
 
                 if (check) {
-                    // always highlight
+                    // highlighting boxes
                     var card = title.closest('.info-card--groups');
                     card.style.border = '4px solid #f5c518';
                     card.style.boxShadow = '0 0 20px #f5c518, 0 0 40px rgba(245,197,24,0.5)';

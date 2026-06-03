@@ -11,7 +11,7 @@ browser.runtime.onMessage.addListener(function (message) {
     if (message.type == "title-found") {
         browser.notifications.create(cakeNotification, {
             type: "basic",
-            iconUrl: browser.runtime.getURL("icons/border-48.png"),
+            iconUrl: browser.runtime.getURL("icons/exclamationmarkicon.png"),
             title: "Alert!",
             message: message.keyword + " group is available!"
         }).then(function () {

@@ -4,8 +4,8 @@
     "version": "1.0",
     "description": "Notifies when a ToonTown Acitivty is ready",
     "browser_action": {
-        "default_icon": "border-48.png",
-        "default_title": "Legacy Button",
+        "default_icon": "icons/ttrexclamationmark.png",
+        "default_title": "ToonHQ Notify",
         "default_popup": "popup.html"
     },
     "permissions": [
@@ -14,7 +14,7 @@
         "tabs"
     ],
     "icons": {
-        "48": "icons/border-48.png"
+        "48": "icons/ttrexclamationmark.png"
     },
     "background": {
         "scripts": [

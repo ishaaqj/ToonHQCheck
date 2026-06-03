@@ -201,18 +201,19 @@ watchBtn.addEventListener('click', () => {
 clearBtn.addEventListener('click', () => {
     isWatching = false;
     selectedKeywords = [];
-    selectedCorp = null;
-    selectedStory = null;
-    browser.storage.local.set({ watching: false, keywords: null });
     document.querySelectorAll('.activity-btn').forEach(b => b.classList.remove('selected'));
-    document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(b => b.classList.remove('selected'));
-    document.querySelectorAll('[data-type="factory"]').forEach(b => b.classList.remove('selected'));
-    document.querySelectorAll('[data-type="shopping"], [data-type="star"]').forEach(b => b.classList.remove('selected'));
-    updateBuildingPreview();
+    browser.storage.local.set({ watching: false, keywords: null });
     setWatchingUI(false, null);
     watchBtn.disabled = true;
     watchBtnText.textContent = 'Select an activity first';
+    selectedCorp = null;
+    selectedStory = null;
+    document.querySelectorAll('[data-type="corp"], [data-type="story"]').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('[data-type="factory"]').forEach(b => b.classList.remove('selected'));
+    updateBuildingPreview();
 });
+
+
 
 function updateWatchBtn() {
     if (selectedKeywords.length > 0) {
